@@ -1,5 +1,6 @@
 let btn = document.getElementById('done');
-
+let set = new Set();
+let i = 0;
 btn.addEventListener('click', () => {
     // console.log('hello');
     let list = document.createElement('div');
@@ -20,18 +21,25 @@ btn.addEventListener('click', () => {
     // console.log(val);
 
     let j = document.querySelectorAll('.i');
+    set.add(i++);
 
     j.forEach(function (val, idx) {
         val.addEventListener('click', () => {
-            val.style.opacity = '0.5';
-            val.style.background = 'greenyellow';
-            val.style.color = 'black';
-            console.log(idx);
+            if (set.has(idx)) {
 
-            val.remove();
+                val.style.opacity = '0.5';
+                val.style.background = 'greenyellow';
+                val.style.color = 'black';
+                // console.log(idx);
 
-            let id = document.querySelector('#task');
-            id.prepend(val);
+                val.remove();
+
+                let id = document.querySelector('#task');
+                id.prepend(val);
+                console.log(idx);
+
+                set.delete(idx);
+            }
 
         })
     });
